@@ -1,0 +1,26 @@
+.main-Product {
+    margin: 0 5%;
+    margin-top: 50px;
+}
+.main-Product .full-navbar {
+    display: flex;
+    gap: 17.5rem;
+    background-color: #fff;
+}
+
+
+
+@media (max-width:1170px) {
+    .main-Product {
+        margin-top: 20px;
+    }
+    
+}
+
+@media (max-width: 1450px) {
+    .category .full-navbar {
+        display: flex;
+        gap: 16rem;
+        margin-bottom: 20px;
+    }
+}

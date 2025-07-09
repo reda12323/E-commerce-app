@@ -1,0 +1,218 @@
+<% title = "Views" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Add custom animations -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+  <style>
+    /* Custom gradient background */
+    .gradient-bg {
+      background: linear-gradient(135deg, #6EE7B7, #3B82F6);
+    }
+    /* Hover effect for thumbnails */
+    .thumbnail {
+      opacity: 0.7;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .thumbnail:hover {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    /* Circle animation for main image */
+    .circle-animation {
+      animation: circle 0.5s ease-in-out;
+    }
+    @keyframes circle {
+      0% {
+        border-radius: 0;
+      }
+      50% {
+        border-radius: 50%;
+      }
+      100% {
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <div class="min-h-screen py-10 px-4">
+    <!-- Main Container -->
+    <div class="max-w-4xl mx-auto bg-white shadow-2xl rounded-lg overflow-hidden animate__animated animate__fadeIn">
+      <!-- Header with Gradient Background -->
+      <div class="gradient-bg p-6">
+        <h1 class="text-4xl font-bold text-white text-center animate__animated animate__fadeInDown">Product Details</h1>
+      </div>
+
+      <!-- Product Info -->
+      <div class="p-6 space-y-8">
+        <!-- Image Section -->
+        <div class="flex flex-col items-center space-y-4">
+          <!-- Main Image -->
+          <div class="relative">
+            <img id="mainImage" src="<%= product.img %>" alt="<%= product.title %>" class="w-64 h-64 object-cover rounded-lg shadow-lg hover-scale cursor-pointer" onclick="swapBack()">
+          </div>
+
+          <!-- Thumbnails -->
+          <div class="flex space-x-4">
+            <% if (product.img2) { %>
+              <img src="<%= product.img2 %>" alt="Thumbnail 2" class="thumbnail w-16 h-16 object-cover rounded-lg shadow-lg cursor-pointer" onclick="swapImages('<%= product.img2 %>', this)">
+            <% } %>
+            <% if (product.img3) { %>
+              <img src="<%= product.img3 %>" alt="Thumbnail 3" class="thumbnail w-16 h-16 object-cover rounded-lg shadow-lg cursor-pointer" onclick="swapImages('<%= product.img3 %>', this)">
+            <% } %>
+            <% if (product.img4) { %>
+              <img src="<%= product.img4 %>" alt="Thumbnail 4" class="thumbnail w-16 h-16 object-cover rounded-lg shadow-lg cursor-pointer" onclick="swapImages('<%= product.img4 %>', this)">
+            <% } %>
+            <% if (product.img5) { %>
+              <img src="<%= product.img5 %>" alt="Thumbnail 5" class="thumbnail w-16 h-16 object-cover rounded-lg shadow-lg cursor-pointer" onclick="swapImages('<%= product.img5 %>', this)">
+            <% } %>
+          </div>
+        </div>
+
+        <!-- Information Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Left Column -->
+          <div class="space-y-6">
+            <!-- Title -->
+            <div class="bg-gray-50 p-6 rounded-lg animate__animated animate__fadeInLeft">
+              <h2 class="text-2xl font-semibold text-gray-800 mb-2">Title:</h2>
+              <p class="text-gray-600 text-lg"><%= product.title %></p>
+            </div>
+
+            <!-- Price -->
+            <div class="bg-gray-50 p-6 rounded-lg animate__animated animate__fadeInRight">
+              <h2 class="text-2xl font-semibold text-gray-800 mb-2">Price:</h2>
+              <p class="text-gray-600 text-lg">
+                $<%= product.price %>
+                <% if (product.oldPrice && product.oldPrice > 0) { %>
+                  <span class="line-through text-gray-400 ml-2">$<%= product.oldPrice %></span>
+                <% } %>
+              </p>
+            </div>
+
+            <!-- Availability -->
+            <div class="bg-gray-50 p-6 rounded-lg animate__animated animate__fadeInLeft">
+              <h2 class="text-2xl font-semibold text-gray-800 mb-2">Availability:</h2>
+              <p class="<%= product.availability ? 'text-green-600' : 'text-red-600' %> text-lg">
+                <%= product.availability ? 'Available' : 'Unavailable' %>
+              </p>
+            </div>
+
+            <!-- Quantity -->
+            <div class="bg-gray-50 p-6 rounded-lg animate__animated animate__fadeInRight">
+              <h2 class="text-2xl font-semibold text-gray-800 mb-2">Quantity:</h2>
+              <p class="text-gray-600 text-lg"><%= product.quantity %></p>
+            </div>
+          </div>
+
+          <!-- Right Column -->
+          <div class="space-y-6">
+            <!-- Details -->
+            <div class="bg-gray-50 p-6 rounded-lg animate__animated animate__fadeInRight">
+              <h2 class="text-2xl font-semibold text-gray-800 mb-2">Details:</h2>
+              <p class="text-gray-600 text-lg"><%= product.details %></p>
+            </div>
+
+            <!-- Category -->
+            <div class="bg-gray-50 p-6 rounded-lg animate__animated animate__fadeInLeft">
+              <h2 class="text-2xl font-semibold text-gray-800 mb-2">Category:</h2>
+              <p class="text-gray-600 text-lg"><span id="categoryDisplay"><%= product.category %></span></p>
+            </div>
+
+            <!-- Timestamps -->
+            <div class="bg-gray-50 p-6 rounded-lg animate__animated animate__fadeInRight">
+              <h2 class="text-2xl font-semibold text-gray-800 mb-2">Created At:</h2>
+              <p class="text-gray-600 text-lg"><%= new Date(product.createdAt).toLocaleDateString() %></p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg animate__animated animate__fadeInLeft">
+              <h2 class="text-2xl font-semibold text-gray-800 mb-2">Updated At:</h2>
+              <p class="text-gray-600 text-lg"><%= new Date(product.updatedAt).toLocaleDateString() %></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Back Button -->
+        <div class="text-center mt-8 animate__animated animate__fadeInUp">
+          <a href="/products" class="gradient-bg text-white font-semibold px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all">
+            Back to Products
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Function to transform the category name
+    function transformCategory(category) {
+      if (!category) return category; // Return if category is empty
+
+      // Add space before uppercase letters and handle special cases like '&'
+      return category
+        .replace(/([A-Z])/g, ' $1') // Add space before uppercase letters
+        .replace(/&/g, ' & ') // Add space around '&'
+        .trim() // Remove leading/trailing spaces
+        .replace(/\s+/g, ' '); // Replace multiple spaces with a single space
+    }
+
+    // Get the category from the server-side variable
+    const category = '<%= product.category %>';
+
+    // Transform the category name
+    const transformedCategory = transformCategory(category);
+
+    // Update the category display element
+    const categoryDisplay = document.getElementById('categoryDisplay');
+    if (categoryDisplay) {
+      categoryDisplay.textContent = transformedCategory;
+    }
+
+    // Track the last swapped thumbnail
+    let lastSwappedThumbnail = null;
+
+    // Function to swap images
+    function swapImages(newSrc, clickedThumbnail) {
+      const mainImage = document.getElementById('mainImage');
+      const mainImageSrc = mainImage.src;
+
+      // Swap the main image and the clicked thumbnail
+      mainImage.src = newSrc;
+      clickedThumbnail.src = mainImageSrc;
+
+      // Store the last swapped thumbnail
+      lastSwappedThumbnail = clickedThumbnail;
+
+      // Add circle animation to the main image
+      mainImage.classList.add('circle-animation');
+      setTimeout(() => {
+        mainImage.classList.remove('circle-animation');
+      }, 500);
+    }
+
+    // Function to swap back to the original main image
+    function swapBack() {
+      if (lastSwappedThumbnail) {
+        const mainImage = document.getElementById('mainImage');
+        const mainImageSrc = mainImage.src;
+
+        // Swap back the main image and the last swapped thumbnail
+        mainImage.src = lastSwappedThumbnail.src;
+        lastSwappedThumbnail.src = mainImageSrc;
+
+        // Clear the last swapped thumbnail
+        lastSwappedThumbnail = null;
+
+        // Add circle animation to the main image
+        mainImage.classList.add('circle-animation');
+        setTimeout(() => {
+          mainImage.classList.remove('circle-animation');
+        }, 500);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+.full-Narrivage .img-liv {
+    width: 220px;
+    height: 370px;
+    margin-right: 10px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.full-Narrivage{
+    margin-bottom: 80px;
+}
+
+.Narrivage .title {
+    font-family: "Afacad Flux", sans-serif;
+    font-weight: 500;
+    font-size: 28px;
+}
+
+.Narrivage .title:last-child {
+    margin-bottom: 35px;
+}
+
+
+.Narrivage .flex.main-border {
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #E1E2E3;
+    border-radius: 5px;
+    padding: 30px;
+    margin: 0;
+    gap: 13px;
+}
+
+.Narrivage .product-item {
+    border: 1px solid #E1E2E3;
+    border-radius: 5px;
+    width: 200px;
+    padding: 15px;
+    text-align: center;
+}
+
+.Narrivage .product-item img {
+    max-width: 170px;
+    transition: opacity 0.3s ease;
+}
+
+
+.Narrivage .product-item .content {
+    border-bottom: 1px solid var(--border-color);
+    width: calc(100% + 30px);
+    margin-left: -15px;
+    margin-bottom: 10px;
+}
+
+.Narrivage .product-item .product-semi-info {
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
+
+.Narrivage .product-item:hover {
+    border: 1px solid var(--blue);
+    scale: 1.02;
+    box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.2);
+}
+
+.Narrivage .product-item img:hover {
+    opacity: 0.75;
+}
+
+.flex.button-insert { 
+    margin-top: 10px;
+    flex-direction: column; 
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    background-color: var(--main-red);
+    padding: 4px 0px;
+    position: relative;
+    border-radius: 5px;
+}
+
+.flex.button-insert:hover {
+    opacity: .8;
+}
+
+.flex.button-insert:hover .sent-insert {
+    transform: translateY(-7px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.flex.button-insert:hover .icon-add {
+    transform: translateY(-9px);
+    opacity: 1;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.button-insert .icon-add {
+    font-size: 1.1rem;
+    color: #fff;
+    font-weight: 500;
+    transform: translateY(8px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.button-insert .sent-insert {
+    font-size: .9rem;
+    color: #fff;
+    font-weight: 500;
+    font-family: "Afacad Flux", sans-serif;
+    transform: translateY(7px);
+    opacity: 1;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+
+@media (max-width:1250px) {
+    .full-Narrivage .img-liv {
+        display: none;
+    }
+
+}
+
+@media (max-width:1170px) {
+    .Narrivage .flex.main-border {
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #E1E2E3;
+        border-radius: 5px;
+        padding: 30px;
+        margin: 0;
+        gap: 13px;
+    }
+
+    .Narrivage .product-item {
+        border: 1px solid #E1E2E3;
+        border-radius: 5px;
+        width: 180px;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .Narrivage .product-item img {
+        max-width: 170px;
+    }
+
+    .Narrivage .title {
+        font-size: 25px;
+    }
+
+
+
+}
+
+@media (max-width:1000px) {
+    .Narrivage .flex.main-border {
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #E1E2E3;
+        border-radius: 5px;
+        padding: 30px 15px;
+        margin: 0;
+        gap: 13px;
+    }
+
+    .Narrivage .product-item .product-semi-info.li {
+        display: none;
+    }
+
+    .Narrivage .product-item {
+        border: 1px solid #E1E2E3;
+        border-radius: 5px;
+        width: 150px;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .Narrivage .product-item img {
+        max-width: 150px;
+    }
+
+    .Narrivage .title {
+        font-size: 22px;
+    }
+}

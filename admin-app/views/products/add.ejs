@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-4 md:p-8">
+  <div class="max-w-4xl mx-auto bg-white p-6 md:p-8 rounded-lg shadow-lg">
+    <!-- Breadcrumb -->
+    <div class="text-gray-500 text-sm mb-4">
+      / <a href="/" class="hover:text-gray-700">products</a> / <a href="/products/add" class="hover:text-gray-700">add</a>
+    </div>
+
+    <!-- Title -->
+    <h1 class="text-2xl font-bold mb-6 text-gray-800">Add New Product</h1>
+
+    <!-- Form -->
+    <form action="/products/store" method="POST" enctype="multipart/form-data">
+      <!-- Image Upload -->
+      <div class="mb-6">
+        <label class="block text-gray-700 mb-2">Upload Image:</label>
+        <div class="flex items-center justify-center w-full">
+          <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors">
+            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+              <svg class="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+              </svg>
+              <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+              <p class="text-xs text-gray-500">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+            </div>
+            <input id="dropzone-file" type="file" name="img" class="hidden" accept=".jpg, .jpeg, .png, .gif" required />
+          </label>
+        </div>
+        <div id="file-display" class="mt-2 hidden flex items-center justify-center bg-gray-100 p-2 rounded-lg">
+          <span id="file-name" class="text-sm text-gray-700 font-medium"></span>
+          <button id="remove-file" type="button" class="ml-2 text-red-500 hover:text-red-700 font-bold text-lg">×</button>
+        </div>
+      </div>
+
+      <!-- Title Input -->
+      <div class="mb-6">
+        <label class="block text-gray-700 mb-2" for="title">Title:</label>
+        <input class="border rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" name="title" required>
+      </div>
+
+      <!-- Price Input -->
+      <div class="mb-6">
+        <label class="block text-gray-700 mb-2" for="price">Price:</label>
+        <input class="border rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" type="number" name="price" required />
+      </div>
+
+      <!-- Old Price Input -->
+      <div class="mb-6">
+        <label class="block text-gray-700 mb-2" for="oldPrice">Old Price:</label>
+        <input class="border rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" type="number" name="oldPrice" value="0" />
+      </div>
+
+      <!-- Details Textarea -->
+      <div class="mb-6">
+        <label class="block text-gray-700 mb-2" for="details">Details:</label>
+        <textarea class="border rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" name="details" rows="4"></textarea>
+      </div>
+
+      <!-- Component Type Radio Buttons -->
+      <div class="mb-6">
+        <label class="block text-gray-700 font-bold mb-2">Select Component Type:</label>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <label class="flex items-center">
+            <input type="radio" name="componentType" value="moniteur" class="mr-2" onchange="updateCategories('moniteur')"> Moniteur
+          </label>
+          <label class="flex items-center">
+            <input type="radio" name="componentType" value="pcGamer" class="mr-2" onchange="updateCategories('pcGamer')"> Config PC Gamer
+          </label>
+          <label class="flex items-center">
+            <input type="radio" name="componentType" value="workstation" class="mr-2" onchange="updateCategories('workstation')"> Workstation
+          </label>
+          <label class="flex items-center">
+            <input type="radio" name="componentType" value="gaming" class="mr-2" onchange="updateCategories('gaming')"> Gaming
+          </label>
+          <label class="flex items-center">
+            <input type="radio" name="componentType" value="meuble" class="mr-2" onchange="updateCategories('meuble')"> Meuble
+          </label>
+          <label class="flex items-center">
+            <input type="radio" name="componentType" value="accessoire" class="mr-2" onchange="updateCategories('accessoire')"> Accessoire
+          </label>
+          <label class="flex items-center">
+            <input type="radio" name="componentType" value="stockage" class="mr-2" onchange="updateCategories('stockage')"> Stockage
+          </label>
+          <label class="flex items-center">
+            <input type="radio" name="componentType" value="composant" class="mr-2" onchange="updateCategories('composant')"> Composant
+          </label>
+          <label class="flex items-center">
+            <input type="radio" name="componentType" value="pcPortable" class="mr-2" onchange="updateCategories('pcPortable')"> Pc Portable
+          </label>
+        </div>
+      </div>
+
+      <!-- Category Dropdown -->
+      <div class="mb-6">
+        <label class="block text-gray-700 font-bold mb-2" for="category">Select Category:</label>
+        <select id="categorySelect" name="category" class="border rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="">Please select a component type first</option>
+        </select>
+      </div>
+
+      <!-- Popularity Input -->
+      <div class="mb-6">
+        <label class="block text-gray-700 mb-2" for="popularity">Popularity:</label>
+        <input class="border rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" type="number" name="popularity" value="0">
+      </div>
+
+      <!-- Quantity Input -->
+      <div class="mb-6">
+        <label class="block text-gray-700 mb-2" for="quantity">Quantity:</label>
+        <input class="border rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" type="number" name="quantity" required>
+      </div>
+
+      <!-- Additional Images Section -->
+      <div class="mb-6">
+        <label class="block text-gray-700 font-bold mb-2">Upload Additional Images:</label>
+        <!-- Img2 -->
+        <div class="flex items-center gap-4 mb-4">
+          <input type="file" id="img2" name="img2" class="hidden" onchange="updateFileName(event, 'file-name-img2')" />
+          <label for="img2" class="cursor-pointer bg-gray-800 text-white px-6 py-2 rounded hover:bg-gray-700 min-w-[150px] text-center">
+            Upload Image
+          </label>
+          <div class="bg-gray-100 p-2 rounded-lg flex-grow">
+            <span id="file-name-img2" class="text-sm text-gray-700 font-medium">No file selected</span>
+          </div>
+        </div>
+        <!-- Img3 -->
+        <div class="flex items-center gap-4 mb-4">
+          <input type="file" id="img3" name="img3" class="hidden" onchange="updateFileName(event, 'file-name-img3')" />
+          <label for="img3" class="cursor-pointer bg-gray-800 text-white px-6 py-2 rounded hover:bg-gray-700 min-w-[150px] text-center">
+            Upload Image
+          </label>
+          <div class="bg-gray-100 p-2 rounded-lg flex-grow">
+            <span id="file-name-img3" class="text-sm text-gray-700 font-medium">No file selected</span>
+          </div>
+        </div>
+        <!-- Img4 -->
+        <div class="flex items-center gap-4 mb-4">
+          <input type="file" id="img4" name="img4" class="hidden" onchange="updateFileName(event, 'file-name-img4')" />
+          <label for="img4" class="cursor-pointer bg-gray-800 text-white px-6 py-2 rounded hover:bg-gray-700 min-w-[150px] text-center">
+            Upload Image
+          </label>
+          <div class="bg-gray-100 p-2 rounded-lg flex-grow">
+            <span id="file-name-img4" class="text-sm text-gray-700 font-medium">No file selected</span>
+          </div>
+        </div>
+        <!-- Img5 -->
+        <div class="flex items-center gap-4 mb-4">
+          <input type="file" id="img5" name="img5" class="hidden" onchange="updateFileName(event, 'file-name-img5')" />
+          <label for="img5" class="cursor-pointer bg-gray-800 text-white px-6 py-2 rounded hover:bg-gray-700 min-w-[150px] text-center">
+            Upload Image
+          </label>
+          <div class="bg-gray-100 p-2 rounded-lg flex-grow">
+            <span id="file-name-img5" class="text-sm text-gray-700 font-medium">No file selected</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Checkboxes -->
+      <div class="mb-6">
+        <label class="flex items-center mb-2">
+          <input checked id="checkbox-1" type="checkbox" value="true" name="availability" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+          <span class="ms-2 text-base font-medium text-blue-600">Availability</span>
+        </label>
+        <label class="flex items-center">
+          <input id="checkbox-2" type="checkbox" value="true" name="isPromo" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+          <span class="ms-2 text-base font-medium text-blue-600">Is Promo</span>
+        </label>
+      </div>
+
+      <!-- Submit Button -->
+      <button class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition-colors" type="submit">Add Product</button>
+    </form>
+  </div>
+
+  <script>
+    // File Upload Display Logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const fileInput = document.getElementById('dropzone-file');
+      const fileDisplay = document.getElementById('file-display');
+      const fileNameDisplay = document.getElementById('file-name');
+      const removeFileButton = document.getElementById('remove-file');
+
+      fileInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+          fileNameDisplay.textContent = file.name;
+          fileDisplay.classList.remove('hidden');
+        }
+      });
+
+      removeFileButton.addEventListener('click', () => {
+        fileInput.value = '';
+        fileDisplay.classList.add('hidden');
+        fileNameDisplay.textContent = '';
+      });
+    });
+
+    // Update File Name for Additional Images
+    function updateFileName(event, elementId) {
+      const fileInput = event.target;
+      const fileName = fileInput.files[0]?.name || "No file selected";
+      document.getElementById(elementId).textContent = fileName;
+    }
+
+    // Category Dropdown Logic
+    const categories = {
+      moniteur: ['Msi', 'Samsung', 'Asus'],
+      pcGamer: ['PcBureauGamer'],
+      workstation: ['WorkstationAmd', 'WorkstationIntel'],
+      gaming: ['Clavier', 'Souris', 'Casque'],
+      meuble: ['ChaiseGamer', 'BureauGamer', 'Chaise&Bureau'],
+      accessoire: ['Microphone', 'HautParleur', 'Webcam'],
+      stockage: ['Hdd', 'Ssd'],
+      composant: ['CarteMere', 'CarteGraphique'],
+      pcPortable: ['PcPortableGamer', 'PcPortableProfessionel']
+    };
+
+    function transformCategory(category) {
+      if (!category) return category;
+      return category
+        .replace(/([A-Z])/g, ' $1')
+        .replace(/&/g, ' & ')
+        .trim()
+        .replace(/\s+/g, ' ');
+    }
+
+    function updateCategories(componentType) {
+      const categorySelect = document.getElementById('categorySelect');
+      categorySelect.innerHTML = '';
+
+      if (categories[componentType]) {
+        categories[componentType].forEach(category => {
+          const option = document.createElement('option');
+          option.value = category;
+          option.textContent = transformCategory(category);
+          categorySelect.appendChild(option);
+        });
+      } else {
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.textContent = 'Please select a component type first';
+        categorySelect.appendChild(defaultOption);
+      }
+    }
+  </script>
+</body>
+</html>

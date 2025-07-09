@@ -1,0 +1,202 @@
+.Cp-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+    overflow: hidden;
+    padding: 10px;
+    justify-content: center;
+}
+
+.Cp-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    flex: 1 1 calc(20% - 20px);
+    max-width: 220px;
+    min-width: 160px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    background: white;
+    overflow: hidden; /* For image scaling */
+    transform-origin: center bottom; /* Better hover effect */
+    will-change: transform, box-shadow; /* Optimize animations */
+    transition: border-color 0.3s ease; /* Smooth border transition */
+    margin-top: 10px;
+    position: relative; 
+}
+
+.Cp-card:hover {
+    border: 1px solid var(--blue);
+}
+
+.Cp-img-container {
+  height: 180px; /* Fixed height for all image containers */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.Cp-img {
+    width: 90%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    transform-origin: center center;
+    will-change: transform; /* Optimize image animations */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.Cp-img:hover {
+    opacity: .8;
+}
+
+.Cp-content {
+    padding: 10px 0;
+    text-align: justify;
+}
+
+.Cp-title {
+    font-size: 15px;
+    font-weight: 600;
+    min-height: 40px; /* Adjust based on longest title */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.flex.button-insert-CP { 
+    margin-top: 10px;
+    flex-direction: column; 
+    height: auto;
+    width: 100%;
+    justify-content: center;
+    background-color: var(--main-red);
+    padding: 4px 0px;
+    position: relative;
+    border-radius: 5px;
+}
+
+.flex.button-insert-CP:hover {
+    opacity: .8;
+}
+
+.flex.button-insert-CP:hover .sent-insert-CP {
+    transform: translateY(-7px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.flex.button-insert-CP:hover .icon-add {
+    transform: translateY(-9px);
+    opacity: 1;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.button-insert-CP .icon-add {
+    font-size: 1.1rem;
+    color: #fff;
+    font-weight: 500;
+    transform: translateY(8px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.button-insert-CP .sent-insert-CP {
+    font-size: .9rem;
+    color: #fff;
+    font-weight: 500;
+    font-family: "Afacad Flux", sans-serif;
+    transform: translateY(7px);
+    opacity: 1;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+
+.Cp-prices {
+    display: flex;
+    gap: 10px;
+    justify-content: center; /* Align prices properly */
+}
+
+.Cp-oldPrice {
+    color: var(--main-red);
+    font-weight: 600;
+    opacity: 0.6;
+    text-decoration: line-through;
+    margin-right: 5px;
+}
+
+.Cp-price {
+    color: var(--main-red);
+    font-weight: 600;
+}
+
+.Cp-available {
+    color: var(--green-color);
+    font-weight: 600;
+}
+
+.Cp-outOfStock {
+    color: var(--main-red);
+    font-weight: 600;
+}
+
+.Cp-details {
+    list-style: none;
+    padding: 0;
+}
+
+.Cp-detail-item {
+    color: #4e4e4e;
+    display: flex;
+    align-items: center;
+}
+
+.Cp-checkmark {
+    color: var(--green-color);
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1200px) {
+    .Cp-card {
+        flex: 1 1 calc(25% - 20px); /* 4 per row */
+    }
+}
+
+@media (max-width: 992px) {
+    .Cp-card {
+        flex: 1 1 calc(33.33% - 20px); /* 3 per row */
+    }
+}
+
+@media (max-width: 768px) {
+    .Cp-card {
+        flex: 1 1 calc(50% - 20px);
+        max-width: 100%; /* Override default 220px limit */
+        min-width: auto;
+    }
+    .Cp-img {
+        width: 40%;
+    }
+    
+}
+
+@media (max-width: 480px) {
+    .Cp-card {
+        flex: 1 1 100%;
+        max-width: 100%; /* Override default 220px limit */
+        min-width: auto;
+    }
+    .Cp-img {
+        width: 40%;
+    }
+}

@@ -1,0 +1,235 @@
+.flex.footer {
+    background-color: #161616;
+    width: calc(100% + 14%);
+    margin-left: -7%;
+    flex-direction: column;
+    padding: 0;
+    align-items: flex-start;
+}
+
+.footer .concept-footer {
+    margin: 70px 50px;
+    width: auto;
+    gap: 45px;
+}
+
+/* .firstP-footer */
+
+.concept-footer .firstP-footer {
+    width: 35%;
+}
+
+.firstP-footer .footer-media {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.firstP-footer .footer-media h2 {
+    color: #fff;
+    font-weight: 500;
+    font-size: 1.4rem;
+}
+
+.firstP-footer .footer-media div {
+    gap: 10px;
+}
+
+.firstP-footer .footer-logo {
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.firstP-footer .footer-logo img {
+    width: 11.5rem;
+}
+
+.firstP-footer .footer-logo p {
+    display: flex;
+    flex-wrap: wrap;
+    color: grey;
+    font-size: 15px;
+}
+
+
+/* secondP-footer */
+
+.concept-footer .secondP-footer {
+    width: 70%;
+    gap: 30px;
+}
+
+/* footer-info */
+
+.secondP-footer .footer-info h2 {
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.secondP-footer .footer-info div {
+    color: grey;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.secondP-footer .footer-info div .footer-icon {
+    color: var(--main-red);
+    padding-right: 5px;
+}
+
+.secondP-footer .footer-info div span{
+    cursor: pointer;
+    transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.secondP-footer .footer-info div span:hover{
+    opacity: .8;
+}
+
+/* footer-compte */
+
+.secondP-footer .footer-compte h2 {
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.secondP-footer .footer-compte div {
+    color: grey;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.secondP-footer .footer-compte div .footer-icon {
+    color: var(--main-red);
+    padding-right: 5px;
+}
+
+.secondP-footer .footer-compte div span{
+    cursor: pointer;
+    transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.secondP-footer .footer-compte div span:hover{
+    opacity: .8;
+}
+
+/* footer-produits */
+
+.secondP-footer .footer-produits h2 {
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.secondP-footer .footer-produits div {
+    color: grey;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.secondP-footer .footer-produits div .footer-icon {
+    color: var(--main-red);
+    padding-right: 5px;
+}
+
+.secondP-footer .footer-produits div span{
+    cursor: pointer;
+    transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.secondP-footer .footer-produits div span:hover{
+    opacity: .8;
+}
+
+/* footer-contact */
+
+.secondP-footer .footer-contact h2 {
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.secondP-footer .footer-contact div {
+    color: grey;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.secondP-footer .footer-contact div .footer-icon {
+    color: var(--main-red);
+    padding-right: 5px;
+}
+
+.secondP-footer .footer-contact div span{
+    cursor: pointer;
+    transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.secondP-footer .footer-contact div span:hover{
+    opacity: .8;
+}
+
+/* copyright */
+
+.footer .copyright {
+    text-align: justify;
+    color: grey;
+    margin-bottom: 70px;
+    margin-left: 50px;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.footer .copyright p{
+    width: 70%;
+}
+
+@media (max-width:1000px) {
+    .footer .concept-footer {
+        margin: 70px 30px;
+    }
+
+    .footer .copyright {
+        margin-left: 30px;
+    }
+
+    .flex.concept-footer{
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    .concept-footer .firstP-footer {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .concept-footer .secondP-footer {
+        width: 100%;
+    }
+}
+
+@media (max-width:780px) {
+    .concept-footer .secondP-footer {
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+    }
+
+    .firstP-footer .footer-logo {
+        flex-direction: column;
+    }
+
+    .firstP-footer .footer-logo img{
+        width: 18rem;
+    }
+}

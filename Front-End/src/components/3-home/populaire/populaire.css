@@ -1,0 +1,312 @@
+.populaire-container {
+    flex-direction: column;
+    align-items: self-start;
+    width: 100%;
+}
+
+.p-carousel-next.p-link {
+    position: relative;
+    right: 20px;
+    bottom: 30px;
+    background-color: #2252D1;
+    padding: 12px;
+    border-radius: 5px;
+    z-index: 999;
+    color: #fff;
+    opacity: .7;
+}
+
+.p-carousel-prev.p-link {
+    position: relative;
+    left: 20px;
+    bottom: 30px;
+    background-color: #2252D1;
+    padding: 12px;
+    border-radius: 5px;
+    z-index: 999;
+    color: #fff;
+    opacity: .7;
+}
+
+.p-carousel-next.p-link svg.p-carousel-next-icon,
+.p-carousel-prev.p-link svg.p-carousel-prev-icon {
+    fill: white;
+    width: 15px;
+    height: 15px;
+}
+
+.p-carousel-next.p-link:hover,
+.p-carousel-prev.p-link:hover {
+    opacity: 1;
+}
+
+.straight-line {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.straight-line .W-carousel {
+    overflow-x: hidden;
+    width: 85%;
+}
+
+.straight-line .pubs img {
+    width: 280px;
+    border-radius: 5px;
+    filter: brightness(90%);
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.straight-line .pubs img:hover {
+    transform: scale(1.12);
+    filter: brightness(100%);
+}
+
+.straight-line .pubs {
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    gap: 25px;
+}
+
+
+.produit-populaire {
+    flex-direction: column;
+    align-items: self-start;
+    margin-top: 5px;
+}
+
+.part-1-populaire {
+    margin-bottom: 50px;
+}
+
+.capsule-of-title {
+    background-color: var(--main-red);
+    padding: 20px 25px;
+    margin: 0 25px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.capsule-of-title .title {
+    font-size: clamp(1.5rem, 2vw + 1rem, 2.7rem);
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+}
+
+.capsule-of-title .title:hover {
+    transition: all 1.5s ease;
+    color: rgb(255, 213, 215);
+}
+
+.part-1-populaire .second-title {
+    justify-content: space-between;
+}
+
+.part-1-populaire .second-title .class-1 {
+    font-weight: 500;
+    font-size: 28px;
+}
+
+.flex.categorie-populaire {
+    gap: 15px;
+}
+
+.flex.categorie-populaire span {
+    font-size: 12px;
+    padding: 3px 5px;
+    font-weight: 500;
+    border-radius: 100px;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+}
+
+.produit-populaire .T-catego:hover {
+    color: var(--main-red);
+    cursor: pointer;
+}
+
+.flex.categorie-populaire span:hover {
+    opacity: 0.8;
+}
+
+
+.produit-populaire .flex.main-border {
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #E1E2E3;
+    border-radius: 5px;
+    padding: 30px;
+    margin: 0;
+    gap: 13px;
+    width: 95.2%;
+}
+
+.produit-populaire .product-item {
+    border: 1px solid #E1E2E3;
+    border-radius: 5px;
+    width: 200px;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.produit-populaire .product-item img {
+    max-width: 170px;
+    transition: opacity 0.3s ease;
+}
+
+.produit-populaire .product-item .content {
+    border-bottom: 1px solid var(--border-color);
+    width: calc(100% + 30px);
+    margin-left: -15px;
+    margin-bottom: 10px;
+}
+
+.produit-populaire .product-item .product-semi-info {
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    text-align: start
+}
+
+.produit-populaire .product-item:hover {
+    border: 1px solid var(--blue);
+    scale: 1.02;
+    box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.2);
+}
+
+.produit-populaire .product-item img:hover {
+    opacity: 0.75;
+}
+
+.flex.button-insert {
+    margin-top: 10px;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    background-color: var(--main-red);
+    padding: 4px 0px;
+    position: relative;
+    border-radius: 5px;
+}
+
+.flex.button-insert:hover .sent-insert {
+    transform: translateY(-7px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.flex.button-insert:hover .icon-add {
+    transform: translateY(-9px);
+    opacity: 1;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.icon-add {
+    font-size: 1.1rem;
+    color: #fff;
+    font-weight: 500;
+    transform: translateY(8px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.sent-insert {
+    font-size: .9rem;
+    color: #fff;
+    font-weight: 500;
+    font-family: "Afacad Flux", sans-serif;
+    transform: translateY(7px);
+    opacity: 1;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+@media (max-width: 1170px) {
+    .produit-populaire .flex.main-border {
+        padding: 30px;
+        gap: 13px;
+    }
+
+
+    .produit-populaire .title {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .produit-populaire .flex.main-border {
+        padding: 30px 15px;
+        gap: 13px;
+    }
+
+    .produit-populaire .product-item .product-semi-info li {
+        display: none;
+    }
+
+    .produit-populaire .title {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 1199px) {
+    .straight-line .pubs {
+        display: none;
+    }
+
+    .straight-line .W-carousel {
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    .produit-populaire .product-item {
+        width: 220px;
+        padding: 10px;
+    }
+
+    .produit-populaire .product-item img {
+        max-width: 190px;
+    }
+}
+
+
+@media (max-width: 967px) {
+    .produit-populaire .product-item {
+        width: 230px;
+        padding: 10px;
+    }
+
+    .produit-populaire .product-item img {
+        max-width: 200px;
+    }
+}
+@media (max-width: 768px) {
+    .title {
+        text-align: left;
+    }
+
+    .produit-populaire .product-item {
+        width: 180px;
+        padding: 10px;
+    }
+
+    .produit-populaire .product-item img {
+        max-width: 160px;
+    }
+}
+
+@media (max-width: 575px) {
+    .produit-populaire .product-item {
+        width: 88%;
+        padding: 10px;
+    }
+
+    .produit-populaire .product-item img {
+        max-width: 220px;
+    }
+}

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= title || 'Admin Panel' %>
+  </title>
+  <link href="/css/output.css" rel="stylesheet">
+  <!-- Add Font Awesome for icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <!-- Custom CSS for scrollbar and active styles -->
+  <style>
+    /* Custom scrollbar styles */
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #2d3748;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #4a5568;
+      border-radius: 4px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #718096;
+    }
+
+    /* Active link styling */
+    .active-link {
+      color: #4299e1;
+      /* Tailwind's blue-400 */
+      font-weight: bold;
+      background: rgba(66, 153, 225, 0.1);
+      /* Subtle background highlight */
+      border-left: 4px solid #4299e1;
+      padding-left: 12px;
+      /* Adjust padding to align text */
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 flex">
+  <!-- Sidebar -->
+  <aside class="bg-gray-800 text-white w-64 h-screen fixed top-0 left-0 flex flex-col overflow-y-auto custom-scrollbar">
+    <div class="p-4 border-b border-gray-700">
+      <h2 class="text-lg font-bold">Admin Profile</h2>
+    </div>
+    <nav class="flex-grow p-4">
+      <ul class="space-y-4">
+        <!-- Dashboard -->
+        <li><a href="/" class="hover:text-blue-400 transition duration-300">Dashboard</a></li>
+
+        <!-- Products Section -->
+        <li>
+          <div class="flex items-center justify-between cursor-pointer" onclick="toggleMenu('products-menu', this)">
+            <a href="#" class="hover:text-blue-400 transition duration-300">Products</a>
+            <i class="fas fa-chevron-down icon-toggle transform transition-transform duration-200"></i>
+          </div>
+          <ul id="products-menu" class="pl-4 mt-2 space-y-2 hidden">
+            <!-- Moniteur Section -->
+            <li>
+              <div class="flex items-center justify-between cursor-pointer" onclick="toggleMenu('moniteur-menu', this)">
+                <a href="#" class="hover:text-blue-400 transition duration-300">Moniteur</a>
+                <i class="fas fa-chevron-down icon-toggle transform transition-transform duration-200"></i>
+              </div>
+              <ul id="moniteur-menu" class="pl-4 mt-1 space-y-1 hidden">
+                <li><a href="/products/categories/Msi" class="hover:text-gray-300 transition duration-300">MSI</a></li>
+                <li><a href="/products/categories/Samsung"
+                    class="hover:text-gray-300 transition duration-300">Samsung</a></li>
+                <li><a href="/products/categories/Asus" class="hover:text-gray-300 transition duration-300">Asus</a>
+                </li>
+              </ul>
+            </li>
+            <!-- Config PC Gamer Section -->
+            <li>
+              <a href="/products/categories/PcBureauGamer" class="hover:text-gray-300 transition duration-300">PC
+                Gamer</a>
+            </li>
+            <!-- Workstation Section -->
+            <li>
+              <div class="flex items-center justify-between cursor-pointer"
+                onclick="toggleMenu('workstation-menu', this)">
+                <a href="#" class="hover:text-blue-400 transition duration-300">Workstation</a>
+                <i class="fas fa-chevron-down icon-toggle transform transition-transform duration-200"></i>
+              </div>
+              <ul id="workstation-menu" class="pl-4 mt-1 space-y-1 hidden">
+                <li><a href="/products/categories/WorkstationAmd"
+                    class="hover:text-gray-300 transition duration-300">Workstation AMD</a></li>
+                <li><a href="/products/categories/WorkstationIntel"
+                    class="hover:text-gray-300 transition duration-300">Workstation Intel</a></li>
+              </ul>
+            </li>
+            <!-- Gaming Section -->
+            <li>
+              <div class="flex items-center justify-between cursor-pointer" onclick="toggleMenu('gaming-menu', this)">
+                <a href="#" class="hover:text-blue-400 transition duration-300">Gaming</a>
+                <i class="fas fa-chevron-down icon-toggle transform transition-transform duration-200"></i>
+              </div>
+              <ul id="gaming-menu" class="pl-4 mt-1 space-y-1 hidden">
+                <li><a href="/products/categories/Clavier"
+                    class="hover:text-gray-300 transition duration-300">Clavier</a></li>
+                <li><a href="/products/categories/Souris" class="hover:text-gray-300 transition duration-300">Souris</a>
+                </li>
+                <li><a href="/products/categories/Casque" class="hover:text-gray-300 transition duration-300">Casque</a>
+                </li>
+              </ul>
+            </li>
+            <!-- Meuble Section -->
+            <li>
+              <div class="flex items-center justify-between cursor-pointer" onclick="toggleMenu('meuble-menu', this)">
+                <a href="#" class="hover:text-blue-400 transition duration-300">Meuble</a>
+                <i class="fas fa-chevron-down icon-toggle transform transition-transform duration-200"></i>
+              </div>
+              <ul id="meuble-menu" class="pl-4 mt-1 space-y-1 hidden">
+                <li><a href="/products/categories/ChaiseGamer"
+                    class="hover:text-gray-300 transition duration-300">Chaise Gamer</a></li>
+                <li><a href="/products/categories/BureauGamer"
+                    class="hover:text-gray-300 transition duration-300">Bureau Gamer</a></li>
+                <li><a href="/products/categories/Chaise&Bureau"
+                    class="hover:text-gray-300 transition duration-300">Chaise & Bureau</a></li>
+              </ul>
+            </li>
+
+            <!-- Accessoire Section -->
+            <li>
+              <div class="flex items-center justify-between cursor-pointer"
+                onclick="toggleMenu('accessoire-menu', this)">
+                <a href="#" class="hover:text-blue-400 transition duration-300">Accessoire</a>
+                <i class="fas fa-chevron-down icon-toggle transform transition-transform duration-200"></i>
+              </div>
+              <ul id="accessoire-menu" class="pl-4 mt-1 space-y-1 hidden">
+                <li><a href="/products/categories/Microphone"
+                    class="hover:text-gray-300 transition duration-300">Microphone</a></li>
+                <li><a href="/products/categories/HautParleur"
+                    class="hover:text-gray-300 transition duration-300">Haut-Parleur</a></li>
+                <li><a href="/products/categories/Webcam" class="hover:text-gray-300 transition duration-300">Webcam</a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Stockage Section -->
+            <li>
+              <div class="flex items-center justify-between cursor-pointer" onclick="toggleMenu('stockage-menu', this)">
+                <a href="#" class="hover:text-blue-400 transition duration-300">Stockage</a>
+                <i class="fas fa-chevron-down icon-toggle transform transition-transform duration-200"></i>
+              </div>
+              <ul id="stockage-menu" class="pl-4 mt-1 space-y-1 hidden">
+                <li><a href="/products/categories/Hdd" class="hover:text-gray-300 transition duration-300">HDD</a></li>
+                <li><a href="/products/categories/Ssd" class="hover:text-gray-300 transition duration-300">SSD</a></li>
+              </ul>
+            </li>
+
+            <!-- Composant Section -->
+            <li>
+              <div class="flex items-center justify-between cursor-pointer"
+                onclick="toggleMenu('composant-menu', this)">
+                <a href="#" class="hover:text-blue-400 transition duration-300">Composant</a>
+                <i class="fas fa-chevron-down icon-toggle transform transition-transform duration-200"></i>
+              </div>
+              <ul id="composant-menu" class="pl-4 mt-1 space-y-1 hidden">
+                <li><a href="/products/categories/CarteMere" class="hover:text-gray-300 transition duration-300">Carte
+                    Mère</a></li>
+                <li><a href="/products/categories/CarteGraphique"
+                    class="hover:text-gray-300 transition duration-300">Carte Graphique</a></li>
+              </ul>
+            </li>
+
+            <!-- PC Portable Section -->
+            <li>
+              <div class="flex items-center justify-between cursor-pointer"
+                onclick="toggleMenu('pc-portable-menu', this)">
+                <a href="#" class="hover:text-blue-400 transition duration-300">PC Portable</a>
+                <i class="fas fa-chevron-down icon-toggle transform transition-transform duration-200"></i>
+              </div>
+              <ul id="pc-portable-menu" class="pl-4 mt-1 space-y-1 hidden">
+                <li><a href="/products/categories/PcPortableGamer"
+                    class="hover:text-gray-300 transition duration-300">PC Portable Gamer</a></li>
+                <li><a href="/products/categories/PcPortableProfessionel"
+                    class="hover:text-gray-300 transition duration-300">PC Portable Professionnel</a></li>
+              </ul>
+            </li>
+
+          </ul>
+        </li>
+
+        <!-- Settings -->
+        <li><a href="/settings" class="hover:text-blue-400 transition duration-300">Settings</a></li>
+      </ul>
+    </nav>
+    <footer class="p-4 border-t border-gray-700">
+      <a href="/logout" class="hover:text-red-400 transition duration-300">Logout</a>
+    </footer>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="ml-64 flex-grow">
+    <header class="bg-blue-600 text-white p-4">
+      <h1 class="text-xl font-bold text-center">
+        <%= title || 'Admin Panel' %>
+      </h1>
+    </header>
+    <main class="p-6">
+      <%- body %>
+    </main>
+  </div>
+
+  <script>
+    // Toggle dropdown menus
+    function toggleMenu(menuId, element) {
+      const menu = document.getElementById(menuId);
+      const icon = element.querySelector('.icon-toggle');
+      const isHidden = menu.classList.contains('hidden');
+  
+      if (isHidden) {
+        menu.classList.remove('hidden'); // Show the menu
+        icon.classList.add('rotate-180'); // Rotate icon
+        saveMenuState(menuId, true); // Save state as open
+      } else {
+        menu.classList.add('hidden'); // Hide the menu
+        icon.classList.remove('rotate-180'); // Reset icon rotation
+        saveMenuState(menuId, false); // Save state as closed
+      }
+    }
+  
+    // Save menu state to localStorage
+    function saveMenuState(menuId, isOpen) {
+      const menuStates = JSON.parse(localStorage.getItem('menuStates')) || {};
+      menuStates[menuId] = isOpen;
+      localStorage.setItem('menuStates', JSON.stringify(menuStates));
+    }
+  
+    // Restore menu states from localStorage
+    function restoreMenuStates() {
+      const menuStates = JSON.parse(localStorage.getItem('menuStates')) || {};
+      Object.keys(menuStates).forEach(menuId => {
+        const menu = document.getElementById(menuId);
+        const element = document.querySelector(`[onclick="toggleMenu('${menuId}', this)"]`);
+        const icon = element?.querySelector('.icon-toggle');
+  
+        if (menuStates[menuId] && menu && element) {
+          menu.classList.remove('hidden'); // Show the menu
+          icon?.classList.add('rotate-180'); // Rotate icon
+        }
+      });
+    }
+  
+    // Highlight active link
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPath = window.location.pathname;
+      const links = document.querySelectorAll('nav a');
+      links.forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
+          link.classList.add('active-link');
+          // Ensure the parent menu is open
+          const parentMenu = link.closest('ul');
+          if (parentMenu && parentMenu.id) {
+            saveMenuState(parentMenu.id, true);
+          }
+        }
+      });
+  
+      // Restore menu states after page load
+      restoreMenuStates();
+    });
+  </script>
+  
+</body>
+
+</html>

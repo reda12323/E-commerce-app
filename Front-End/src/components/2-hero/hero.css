@@ -1,0 +1,304 @@
+section {
+    margin: 0 5%;
+}
+
+section .header-section {
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+section.flex .logo {
+    width: 11rem;
+    cursor:pointer;
+    transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+section.flex .logo:hover {
+    opacity: .8;
+}
+
+section .responsive-contenu-search-bar {
+    display: none;
+}
+
+.contenu-search-bar .input-capsule {
+    width: 450px;
+    background-color: var(--Bgc-header);
+    border: 2px solid var(--border-input);
+    border-right: 2px solid var(--border-input);
+    padding: 0;
+    text-align: center;
+    padding: .4rem;
+    border-radius: 5px 0 0 5px;
+}
+
+.input-capsule input {
+    background-color: var(--Bgc-header);
+    color: var(--header-color);
+    border: none;
+    padding: 0.4rem 0;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    width: 100%;
+    height: 100%;
+}
+
+.input-capsule input:focus {
+    border: none;
+    outline: none;
+}
+
+section .dropdown {
+    position: relative;
+    cursor: pointer;
+}
+
+section .dropdown-selected {
+    background-color: var(--Bgc-header);
+    color: var(--header-color);
+    border-top: 2px solid var(--border-input);
+    border-bottom: 2px solid var(--border-input);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    min-height: 40px;
+    padding: 0px 10px;
+}
+
+section .dropdown-selected:hover {
+    color: var(--main-red);
+}
+
+section .dropdown-selected.more-width {
+    gap: 3rem;
+}
+
+section .dropdown-selected .icon-keyboard_arrow_down {
+    transition: transform 0.4s ease;
+}
+
+section .dropdown-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    align-items: flex-start;
+    z-index: 1;
+    width: max-content;
+}
+
+section .dropdown-options div {
+    padding: 0.5rem;
+    color: var(--header-color);
+    transition: background-color 0.3s ease;
+}
+
+section .dropdown-options div:hover {
+    color: var(--main-red);
+}
+
+section .dropdown-selected .icon-keyboard_arrow_down {
+    color: var(--header-color);
+    transition: transform .6s ease;
+}
+
+section .rotate {
+    transform: rotate(180deg);
+}
+
+section .contenu-search-bar .iconSearch-capsule {
+    justify-content: center;
+    background-color: var(--main-red);
+    border: 1px solid var(--main-red);
+    text-align: center;
+    padding: .4rem;
+    border-radius: 0px 5px 5px 0px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+section .contenu-search-bar .iconSearch-capsule .icon-search {
+    color: #fff;
+    background-color: var(--main-red);
+    padding: .4rem;
+}
+
+section .contenu-search-bar:hover .iconSearch-capsule {
+    opacity: .8;
+}
+
+section .contenu-shopping-cart {
+    cursor: pointer;
+}
+
+section .contenu-shopping-cart .icon-shopping-cart {
+    color: var(--header-color);
+    font-size: 2.3rem;
+    font-weight: lighter;
+}
+
+section .contenu-shopping-cart .lenght-shopping-cart {
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    position: relative;
+    width: 15px;
+    bottom: 10px;
+    right: 10px;
+    text-align: center;
+    background-color: var(--main-red);
+    padding: 0rem .1rem;
+    border-radius: 100px;
+}
+
+section .contenu-shopping-cart .cart-price {
+    font-weight: 500;
+    color: var(--header-color);
+}
+
+section .contenu-shopping-cart .cart-price #cart {
+    font-weight: bold;
+    font-size: 1.33rem;
+}
+
+section .contenu-shopping-cart .cart-price #cart:hover {
+    opacity: .8;
+}
+
+    {
+    /*Responsive Search */
+}
+
+.responsive-contenu-search-bar {
+        width: 100%;
+    }
+
+.responsive-contenu-search-bar .responsive-input-capsule {
+    width: 100%;
+    background-color: var(--Bgc-header);
+    border: 2px solid var(--border-input);
+    border-right: 2px solid var(--border-input);
+    padding: 0;
+    text-align: center;
+    padding: .4rem;
+    border-radius: 5px 0 0 5px;
+}
+
+.responsive-input-capsule input {
+    background-color: var(--Bgc-header);
+    color: var(--header-color);
+    border: none;
+    padding: 0.4rem 0;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    width: 100%;
+    height: 100%;
+}
+
+.responsive-input-capsule input:focus {
+    border: none;
+    outline: none;
+}
+
+section .responsive-dropdown {
+    position: relative;
+    cursor: pointer;
+}
+
+section .responsive-dropdown-selected {
+    background-color: var(--Bgc-header);
+    color: var(--header-color);
+    border-top: 2px solid var(--border-input);
+    border-bottom: 2px solid var(--border-input);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    min-height: 40px;
+    padding: 0px 10px;
+}
+
+section .responsive-dropdown-selected:hover {
+    color: var(--main-red);
+}
+
+section .responsive-dropdown-selected.more-width {
+    gap: 3rem;
+}
+
+section .responsive-dropdown-selected .icon-keyboard_arrow_down {
+    transition: transform 0.4s ease;
+}
+
+section .responsive-dropdown-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    align-items: flex-start;
+    z-index: 1;
+    width: max-content;
+}
+
+section .responsive-dropdown-options div {
+    padding: 0.5rem;
+    color: var(--header-color);
+    transition: background-color 0.3s ease;
+}
+
+section .responsive-dropdown-options div:hover {
+    color: var(--main-red);
+}
+
+section .responsive-dropdown-selected .icon-keyboard_arrow_down {
+    color: var(--header-color);
+    transition: transform .6s ease;
+}
+
+section .responsive-contenu-search-bar .responsive-iconSearch-capsule {
+    justify-content: center;
+    background-color: var(--main-red);
+    border: 1px solid var(--main-red);
+    text-align: center;
+    padding: .4rem;
+    border-radius: 0px 5px 5px 0px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+section .responsive-contenu-search-bar .responsive-iconSearch-capsule .icon-search {
+    color: #fff;
+    background-color: var(--main-red);
+    padding: .4rem;
+}
+
+section .responsive-contenu-search-bar:hover .responsive-iconSearch-capsule {
+    opacity: .8;
+}
+
+
+@media (max-width: 1170px) {
+    section .header-section {
+        display: none;
+    }
+
+    section.flex {
+        flex-direction: column;
+    }
+
+    section .responsive-contenu-search-bar {
+        display: flex;
+    }
+}

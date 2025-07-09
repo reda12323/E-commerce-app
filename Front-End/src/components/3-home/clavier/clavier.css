@@ -1,0 +1,249 @@
+.items-clavier{
+    flex-direction: column;
+    overflow-y: hidden;
+    width: 100%;
+}
+
+.items-clavier .clavier-title {
+    width: 100%;
+    justify-content: space-between;
+    margin: 60px 0px 15px 0px;
+}
+
+.items-clavier .clavier-title h2{
+    display: flex;
+    font-size: 25px;
+    flex-wrap: wrap;
+    font-weight: 500;
+}
+
+.items-clavier .clavier-title a{
+    margin-left: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+    width: max-content;
+    text-decoration: none;
+}
+
+
+.items-clavier .W-carousel{
+    width: 100%;
+    overflow-y: hidden;
+
+}
+
+.items-clavier .W-carousel .mini-pub{
+    width: 30%;
+}
+
+.items-clavier .W-carousel .populaire-carousel{
+    width: 70%;
+
+}
+
+.mini-pub .image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.mini-pub .image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.mini-pub .image-wrapper:hover img {
+    transform: scale(1.5);
+}
+
+/* Part of the clavier */
+.clavier-container {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.flex.produit-clavier {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 5px;
+}
+
+.clavier-main-border {
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #E1E2E3;
+    border-radius: 5px;
+    padding: 30px;
+    margin: 0;
+    gap: 13px;
+    width: 95.2%;
+}
+
+.product-item-clavier {
+    border: 1px solid #E1E2E3;
+    border-radius: 5px;
+    width: 150px;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 15px;
+    margin: 0px 0px 0px 5px;
+}
+
+.product-item-clavier img {
+    max-width: 140px;
+    transition: opacity 0.3s ease;
+}
+
+.product-item-clavier .content {
+    border-bottom: 1px solid var(--border-color);
+    width: calc(100% + 30px);
+    margin-left: -15px;
+    margin-bottom: 10px;
+}
+
+.product-item-clavier .product-semi-info h3{
+    display: flex;
+    font-size: 16px;
+    flex-wrap: wrap;
+}
+
+.product-item-clavier .product-semi-info .li{
+    font-size: 13px;
+}
+
+.product-item-clavier .product-semi-info {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: start;
+}
+
+.product-item-clavier:hover {
+    border: 1px solid var(--blue);
+    scale: 1.02;
+    box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.2);
+}
+
+.product-item-clavier img:hover {
+    opacity: 0.75;
+}
+
+.flex.button-insert-clavier {
+    margin-top: 10px;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    background-color: var(--main-red);
+    padding: 4px 0px;
+    position: relative;
+    border-radius: 5px;
+}
+
+.flex.button-insert-clavier:hover .sent-insert-clavier {
+    transform: translateY(-7px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.flex.button-insert-clavier:hover .icon-add {
+    transform: translateY(-9px);
+    opacity: 1;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.icon-add {
+    font-size: 1.1rem;
+    color: #fff;
+    font-weight: 500;
+    transform: translateY(8px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.sent-insert-clavier {
+    font-size: 0.9rem;
+    color: #fff;
+    font-weight: 500;
+    font-family: "Afacad Flux", sans-serif;
+    transform: translateY(7px);
+    opacity: 1;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+@media (max-width: 1070px) {
+    .product-item-clavier img {
+        max-width: 130px;
+    }
+
+    .product-item-clavier {
+        width: 130px;
+        padding: 15px;
+    }
+    
+}
+
+@media (max-width: 967px) {
+    .product-item-clavier {
+        width: 180px;
+        padding: 10px;
+    }
+
+    .product-item-clavier img {
+        max-width: 150px;
+    }
+
+    .W-carousel .mini-pub{
+        display: none;
+        width: 0;
+    }
+
+    .W-carousel .populaire-carousel{
+        flex-grow: 1;
+    }
+}
+
+@media (max-width: 825px) {
+    .product-item-clavier {
+        width: 140px;
+        padding: 10px;
+    }
+
+    .product-item-clavier img {
+        max-width: 120px;
+    }
+}
+
+@media (max-width: 695px) {
+    .product-item-clavier {
+        width: 180px;
+        padding: 10px;
+    }
+
+    .product-item-clavier img {
+        max-width: 150px;
+    }
+}
+
+@media (max-width: 575px) {
+    .product-item-clavier {
+        width: 88%;
+        padding: 10px;
+        margin: 0px 0px 0px 10px;
+    }
+
+    .product-item-clavier img {
+        max-width: 220px;
+    }
+
+    .items-clavier .clavier-title h2{
+        font-size: 20px;
+    }
+}

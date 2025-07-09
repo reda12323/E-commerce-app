@@ -1,0 +1,26 @@
+.main-Contact {
+    margin: 0 5%;
+    margin-top: 50px;
+}
+.main-Contact .full-navbar {
+    display: flex;
+    gap: 17.5rem;
+    background-color: #fff;
+}
+
+
+
+@media (max-width:1170px) {
+    .main-Contact {
+        margin-top: 20px;
+    }
+    
+}
+
+@media (max-width: 1450px) {
+    .category .full-navbar {
+        display: flex;
+        gap: 16rem;
+        margin-bottom: 20px;
+    }
+}

@@ -1,0 +1,83 @@
+.avan-header {
+    width: 100%;
+    justify-content: space-around;
+    display: flex;
+    margin-top: 25px;
+    padding-top: 40px;
+    padding-bottom: 50px;
+    border-top: 1px solid rgb(229, 227, 227);
+}
+
+.avan-space {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.avan-text{
+    flex-direction: column;
+}
+
+.avan-logo span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--main-red);
+    border-radius: 50%;
+    width: 55px; 
+    height: 55px; 
+}
+
+span .avan-icon {
+    font-size: 1.6rem;
+    color: var(--main-red);
+    transition: transform 0.3s ease, color 0.3s ease;
+    line-height: 1; 
+}
+
+.avan-space .title-avan {
+    font-size: 1.4rem;
+    color: #000;
+    font-weight: 500;
+    margin: 0;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.avan-space .desc-avan{
+    font-size: 14px;
+    color: grey;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 1200px) {
+    .avan-header {
+        gap: 10px;
+    }
+    .flex.avan-space {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .avan-space .title-avan {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 850px) {
+    .flex.avan-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 15px;
+        gap: 40px;
+    }
+    .flex.avan-space {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    .avan-space .title-avan {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}

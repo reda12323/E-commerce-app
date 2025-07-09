@@ -1,0 +1,414 @@
+<% title = "Dashboard" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Add Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Add custom animations -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+  <style>
+    /* Custom gradient background */
+    .gradient-bg {
+      background: linear-gradient(135deg, #6EE7B7, #3B82F6);
+    }
+    /* Hover effect for table rows */
+    .table-row-hover:hover {
+      background-color: #f3f4f6;
+      transition: background-color 0.3s ease;
+    }
+    /* Animation for table rows */
+    .animate-fade-in {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /* Hide elements with animation */
+    .hide-with-animation {
+      animation: hideElement 0.3s ease-in-out forwards;
+    }
+    @keyframes hideElement {
+      from {
+        opacity: 1;
+        transform: scale(1);
+      }
+      to {
+        opacity: 0;
+        transform: scale(0);
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <div class="p-6">
+    <!-- Header -->
+    <div class="gradient-bg p-6 rounded-t-lg">
+      <h1 class="text-3xl font-bold text-white text-center">Product List</h1>
+    </div>
+
+    <!-- Statistics Dashboard -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+      <!-- Total Products -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold text-gray-800">Total Products</h2>
+        <p class="text-3xl font-bold text-blue-600"><%= products.length %></p>
+      </div>
+
+      <!-- Total Inventory Quantity -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold text-gray-800">Total Inventory</h2>
+        <p class="text-3xl font-bold text-green-600">
+          <%= products.reduce((total, product) => total + product.quantity, 0) %>
+        </p>
+      </div>
+
+      <!-- Availability Status -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold text-gray-800">Availability</h2>
+        <p class="text-3xl font-bold text-purple-600">
+          <%= products.filter(product => product.availability).length %> Available
+        </p>
+      </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+      <!-- Price Distribution Chart -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Price Distribution</h2>
+        <canvas id="priceChart"></canvas>
+      </div>
+
+      <!-- Popularity Distribution Chart -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Popularity Distribution</h2>
+        <canvas id="popularityChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Actions and Search -->
+    <div class="flex flex-col sm:flex-row justify-between items-center bg-white p-4 shadow-sm mt-6">
+      <div class="flex space-x-4">
+        <a href="/products/add" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">Add New Product</a>
+        <button id="reverseButton" class="bg-gray-200 text-gray-700 px-4 py-2 rounded hover:bg-gray-300 transition-colors">
+          Reverse Order
+        </button>
+        <!-- Bulk Delete Button -->
+        <button id="bulkDeleteButton" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors hidden">
+          Delete Selected
+        </button>
+      </div>
+      <div class="relative mt-4 sm:mt-0">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+          <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <input type="text" id="table-search" class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search for products">
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="overflow-x-auto bg-white shadow-md rounded-b-lg mt-6">
+      <table class="w-full text-sm text-left text-gray-500">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+          <tr>
+            <th scope="col" class="px-6 py-3">Select</th>
+            <th scope="col" class="px-6 py-3">Image</th>
+            <th scope="col" class="px-6 py-3">Title</th>
+            <th scope="col" class="px-6 py-3 cursor-pointer" onclick="sortTable('price')">Price</th>
+            <th scope="col" class="px-6 py-3">Quantity</th>
+            <th scope="col" class="px-6 py-3 cursor-pointer" onclick="sortTable('popularity')">Popularity</th>
+            <th scope="col" class="px-6 py-3">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="productTableBody">
+          <!-- Table rows will be dynamically populated here -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="flex justify-center mt-6">
+      <nav id="pagination" class="inline-flex rounded-md shadow-sm">
+        <!-- Pagination buttons will be dynamically populated here -->
+      </nav>
+    </div>
+  </div>
+
+  <script>
+    // Product data
+    let allProducts = <%- JSON.stringify(products) %>; // Original list of products
+    let products = [...allProducts]; // Working list of products (can be filtered)
+
+    // Pagination settings
+    const productsPerPage = 5; // Number of products per page
+    let currentPage = 1; // Current page
+
+    // Track selected products for bulk deletion
+    let selectedProducts = new Set();
+
+    // Render table rows for the current page
+    function renderTable() {
+      const startIndex = (currentPage - 1) * productsPerPage;
+      const endIndex = startIndex + productsPerPage;
+      const paginatedProducts = products.slice(startIndex, endIndex);
+
+      const tbody = document.querySelector('#productTableBody');
+      tbody.innerHTML = ''; // Clear the table body
+
+      paginatedProducts.forEach((product, index) => {
+        const isChecked = selectedProducts.has(product._id); // Check if the product is selected
+        tbody.innerHTML += `
+          <tr class="bg-white border-b table-row-hover animate-fade-in" style="animation-delay: ${index * 0.1}s;">
+            <td class="px-6 py-4">
+              <input type="checkbox" class="product-checkbox" data-id="${product._id}" ${isChecked ? 'checked' : ''} onchange="handleCheckboxChange(this)">
+            </td>
+            <td class="px-6 py-4">
+              <img src="${product.img}" class="w-16 h-16 mx-auto rounded-lg">
+            </td>
+            <td class="px-6 py-4 text-gray-900">${product.title}</td>
+            <td class="px-6 py-4 text-gray-900">$${product.price}</td>
+            <td class="px-6 py-4 text-gray-900">${product.quantity}</td>
+            <td class="px-6 py-4 text-gray-900">${product.popularity}</td>
+            <td class="px-6 py-4 text-center">
+              <div class="actions" ${isChecked ? 'style="display: none;"' : ''}>
+                <a href="/products/edit/${product._id}" class="font-medium text-blue-600 hover:underline">Edit</a> |
+                <a href="/products/delete/${product._id}" class="font-medium text-red-600 hover:underline">Delete</a> |
+                <a href="/products/view/${product._id}" class="font-medium text-green-600 hover:underline">View</a>
+              </div>
+            </td>
+          </tr>
+        `;
+      });
+
+      // Update the visibility of the "Delete Selected" button
+      updateBulkDeleteButtonVisibility();
+    }
+
+    // Handle checkbox change
+    function handleCheckboxChange(checkbox) {
+      const productId = checkbox.dataset.id;
+      if (checkbox.checked) {
+        selectedProducts.add(productId);
+      } else {
+        selectedProducts.delete(productId);
+      }
+
+      // Hide actions for selected rows
+      const row = checkbox.closest('tr');
+      const actions = row.querySelector('.actions');
+      if (checkbox.checked) {
+        actions.classList.add('hide-with-animation');
+        setTimeout(() => {
+          actions.style.display = 'none';
+        }, 300);
+      } else {
+        actions.style.display = 'block';
+        actions.classList.remove('hide-with-animation');
+      }
+
+      // Update the visibility of the "Delete Selected" button
+      updateBulkDeleteButtonVisibility();
+    }
+
+    // Update the visibility of the "Delete Selected" button
+    function updateBulkDeleteButtonVisibility() {
+      const bulkDeleteButton = document.getElementById('bulkDeleteButton');
+      if (selectedProducts.size > 0) {
+        bulkDeleteButton.classList.remove('hidden');
+      } else {
+        bulkDeleteButton.classList.add('hidden');
+      }
+    }
+
+    // Bulk delete functionality
+    const bulkDeleteButton = document.getElementById('bulkDeleteButton');
+    bulkDeleteButton.addEventListener('click', () => {
+      if (selectedProducts.size === 0) return;
+
+      // Confirm deletion
+      if (confirm('Are you sure you want to delete the selected products?')) {
+        // Send a request to delete the selected products
+        fetch('/products/deleteAll', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ ids: Array.from(selectedProducts) }),
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              // Remove deleted products from the list
+              products = products.filter(product => !selectedProducts.has(product._id));
+              selectedProducts.clear();
+              renderTable();
+              renderPagination();
+              updateBulkDeleteButtonVisibility();
+            } else {
+              alert('Failed to delete products.');
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while deleting products.');
+          });
+      }
+    });
+
+    // Render pagination buttons
+    function renderPagination() {
+      const totalPages = Math.ceil(products.length / productsPerPage);
+      const pagination = document.querySelector('#pagination');
+      pagination.innerHTML = ''; // Clear pagination buttons
+
+      // Previous button
+      pagination.innerHTML += `
+        <button onclick="changePage(${currentPage - 1})" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50" ${currentPage === 1 ? 'disabled' : ''}>
+          Previous
+        </button>
+      `;
+
+      // Page numbers
+      for (let i = 1; i <= totalPages; i++) {
+        pagination.innerHTML += `
+          <button onclick="changePage(${i})" class="px-4 py-2 text-sm font-medium ${currentPage === i ? 'text-blue-600 bg-blue-50' : 'text-gray-700 bg-white'} border border-gray-300 hover:bg-gray-50">
+            ${i}
+          </button>
+        `;
+      }
+
+      // Next button
+      pagination.innerHTML += `
+        <button onclick="changePage(${currentPage + 1})" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50" ${currentPage === totalPages ? 'disabled' : ''}>
+          Next
+        </button>
+      `;
+    }
+
+    // Change page
+    function changePage(page) {
+      if (page < 1 || page > Math.ceil(products.length / productsPerPage)) return;
+      currentPage = page;
+      renderTable();
+      renderPagination();
+    }
+
+    // Reverse order functionality
+    const reverseButton = document.querySelector('#reverseButton');
+    reverseButton.addEventListener('click', () => {
+      products.reverse();
+      renderTable();
+      renderPagination();
+    });
+
+    // Search functionality
+    const searchInput = document.querySelector('#table-search');
+    searchInput.addEventListener('input', () => {
+      const searchTerm = searchInput.value.toLowerCase();
+
+      if (searchTerm === '') {
+        // If the search input is empty, reset to the original list of products
+        products = [...allProducts];
+      } else {
+        // Filter products that start with the search term
+        products = allProducts.filter(product =>
+          product.title.toLowerCase().startsWith(searchTerm)
+        );
+      }
+
+      currentPage = 1; // Reset to the first page after search
+      renderTable();
+      renderPagination();
+    });
+
+    // Sort functionality
+    function sortTable(column) {
+      products.sort((a, b) => {
+        if (column === 'price') {
+          return a.price - b.price;
+        } else if (column === 'popularity') {
+          return a.popularity - b.popularity;
+        }
+        return 0;
+      });
+      renderTable();
+    }
+
+    // Initial render
+    renderTable();
+    renderPagination();
+
+    // Initialize Charts
+    const priceChartCtx = document.getElementById('priceChart').getContext('2d');
+    const popularityChartCtx = document.getElementById('popularityChart').getContext('2d');
+
+    // Price Distribution Chart
+    const priceRanges = [
+      { label: '$0 - $50', min: 0, max: 50 },
+      { label: '$50 - $100', min: 50, max: 100 },
+      { label: '$100 - $150', min: 100, max: 150 },
+      { label: '$150+', min: 150, max: Infinity },
+    ];
+
+    const priceData = priceRanges.map(range => {
+      return products.filter(product => product.price >= range.min && product.price < range.max).length;
+    });
+
+    new Chart(priceChartCtx, {
+      type: 'bar',
+      data: {
+        labels: priceRanges.map(range => range.label),
+        datasets: [{
+          label: 'Number of Products',
+          data: priceData,
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1,
+        }],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+
+    // Popularity Distribution Chart
+    const popularityData = {
+      labels: ['Low', 'Medium', 'High'],
+      datasets: [{
+        label: 'Popularity',
+        data: [
+          products.filter(product => product.popularity <= 5).length, // Low
+          products.filter(product => product.popularity > 5 && product.popularity <= 15).length, // Medium
+          products.filter(product => product.popularity > 15).length, // High
+        ],
+        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'],
+        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)'],
+        borderWidth: 1,
+      }],
+    };
+
+    new Chart(popularityChartCtx, {
+      type: 'pie',
+      data: popularityData,
+    });
+  </script>
+</body>
+</html>

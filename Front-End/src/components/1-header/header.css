@@ -1,0 +1,105 @@
+header {
+    padding: 0.75rem 0;
+    background-color: var(--Bgc-header);
+    border-bottom: 1px solid #e5e5e5;
+    width: calc(100% + 1.53% + 1.53%);
+    margin-left: calc(1.53% * -1);
+    color: var(--header-color);
+    font-size: 0.88rem;
+    font-family: "Afacad Flux", sans-serif;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2%;
+}
+
+header.flex{
+    justify-content: space-around;
+}
+
+header .icon-phone, header .icon-email, header .icon-lock, header .icon-keyboard_arrow_down{
+    color: var(--main-red);
+    
+}
+
+header .header-contact,header .header-info{
+    gap: 2.5rem;
+}
+
+.header-contact-1, .header-contact-2{
+    gap: 0.8rem;
+}
+
+header .header-email,header .header-phone{
+    gap: .55rem;
+}
+
+header .dropdown {
+    position: relative;
+    cursor: pointer;
+}
+
+header .dropdown-selected {
+    background-color: var(--main-bg);
+    color: var(--header-color);
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+header .dropdown-selected:hover {
+    color: var(--main-red);
+}
+
+header .dropdown-selected:hover .icon-keyboard_arrow_down {
+    transform: rotate(180deg); 
+    transition: transform 0.4s ease; 
+}
+
+header .dropdown-selected .icon-keyboard_arrow_down {
+    transition: transform 0.4s ease; 
+}
+
+header .dropdown-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none; 
+    flex-direction: column;
+    z-index: 1;
+}
+
+header .dropdown:hover .dropdown-options {
+    display: flex;
+    flex-direction: column;
+}
+
+
+header .dropdown-options div {
+    padding: 0.5rem;
+    color: var(--header-color);
+    transition: background-color 0.3s ease;
+}
+
+
+header .dropdown-options div:hover {
+    color: var(--main-red);
+}
+
+header .icon-keyboard_arrow_down {
+    color: var(--header-color);
+}
+
+header .account{
+    gap: .55rem;
+}
+
+@media (max-width:820px) {
+    header.flex .header-contact{
+        display: none;
+    }
+}

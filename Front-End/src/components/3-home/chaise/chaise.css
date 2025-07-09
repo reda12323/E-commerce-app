@@ -1,0 +1,202 @@
+.chaise-container {
+    width: 100%;
+}
+
+.chaise-container .decoration{
+    margin-top: 65px;
+    gap: 20px;
+}
+.chaise-title {
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.chaise-title a {
+    text-decoration: none;
+}
+
+.nav-chaise {
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-chaise .box-chaise {
+    border: 1px solid var(--main-red);
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px 10px 10px 10px;
+}
+
+.nav-chaise .box-chaise:hover {
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+.nav-chaise .chaise img {
+    transition: opacity 0.3s ease, border 0.3s ease;
+    width: 180px;
+}
+
+.nav-chaise .chaise img:hover {
+    opacity: 0.8;
+}
+
+.nav-chaise .Rhalf-info {
+    flex-direction: column;
+    align-items: start;
+    gap: 12px;
+}
+
+.nav-chaise .chaise-info {
+    font-size: 35px;
+    font-weight: bold;
+    transition: color 0.3s ease, font-size 0.3s ease;
+    width: 0%;
+    color: rgb(222, 221, 221);
+}
+
+.nav-chaise .chaise-info:hover {
+    color: #0ECEA6;
+    font-size: 37px;
+}
+
+.go-to{
+    background-color: var(--main-red);
+    padding: 7px 12px;
+    border-radius: 50px;
+    color: #fff;
+}
+
+.go-to:hover{
+    background-color: #000;
+    scale: 1.02;
+}
+
+.go-to .icon-keyboard_arrow_right {
+    display: inline-block; 
+    transition: transform 0.3s ease;
+}
+
+.go-to:hover .icon-keyboard_arrow_right {
+    transform: rotate(90deg);
+}
+
+.Rhalf-info #price {
+    color: grey;
+    font-size: 14.5px;
+}
+
+.Rhalf-info #title {
+    font-weight: bold;
+}
+
+.chaise-container .image-wrapper {
+    position: relative;
+    width: 50%;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.chaise-container .image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.chaise-container .image-wrapper:hover img {
+    transform: scale(1.1);
+}
+
+@media (max-width: 1110px) {
+    .nav-chaise {
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-chaise .chaise img {
+        width: 140px;
+        height: 140px;
+    }
+
+    .Rhalf-info #title {
+        font-size: 15px;
+    }
+
+    .nav-chaise .Rhalf-info {
+        flex-direction: column;
+        align-items: start;
+        gap: 12px;
+        width: 70px;
+    }
+}
+
+@media (max-width: 1020px) {
+    .nav-chaise {
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: start;
+    }
+
+    .nav-chaise .chaise img {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media (max-width: 916px) {
+    .nav-chaise {
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-chaise .chaise img {
+        width: 180px;
+        height: 180px;
+    }
+
+    .Rhalf-info #title {
+        font-size: 16px;
+    }
+
+    .nav-chaise .Rhalf-info {
+        flex-direction: column;
+        align-items: start;
+        gap: 12px;
+        width: 100px;
+    }
+}
+
+@media (max-width: 780px) {
+    .nav-chaise {
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-chaise .chaise img {
+        width: 180px;
+        height: 180px;
+    }
+
+    .Rhalf-info #title {
+        font-size: 16px;
+    }
+
+    .nav-chaise .Rhalf-info {
+        flex-direction: column;
+        align-items: start;
+        gap: 12px;
+        width: max-content;
+    }
+
+    .nav-chaise .box-chaise {
+        width: 100%;
+        padding: 25px 25px 25px 25px;
+    }
+
+}
