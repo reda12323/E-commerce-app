@@ -5,17 +5,43 @@ import { FaHeart, FaMinus, FaPlus, FaShoppingCart } from 'react-icons/fa';
 import { IoMdHeartEmpty } from "react-icons/io";
 import Emplacement from '../emplacement/Emplacement';
 
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../2-hero/redux/cartSlice';
+
 
 const ProductCard = ({ title, name, category, id }) => {
     const [product, setProduct] = useState(null);
     const [quantity, setQuantity] = useState(1);
     const [selectedImage, setSelectedImage] = useState('');
     const [afficheDetails, setAfficheDetails] = useState(true);
+    const dispatch = useDispatch();
 
     function Ajouter(e) {
         e.preventDefault();
-        setQuantity((prevQuantity) => prevQuantity + 1);
+        setQuantity((prevQuantity) => {
+            if (prevQuantity < product.quantity) {
+                return prevQuantity + 1;
+            } else {
+                return prevQuantity;
+            }
+        });
     }
+
+
+
+
+    const handleAddToCart = () => {
+        if (!product.availability) return;
+
+        dispatch(addToCart({
+            id: product._id,
+            name: product.title,
+            price: product.price,
+            quantity: quantity,
+        }));
+    };
+
+
 
     function Moins(e) {
         e.preventDefault();
@@ -60,9 +86,10 @@ const ProductCard = ({ title, name, category, id }) => {
         setSelectedImage(img);
     };
 
+
     return (
         <div className='Pro-Page'>
-            <div> <Emplacement category={category} name={name} title={title}/> </div>
+            <div> <Emplacement category={category} name={name} title={title} /> </div>
             <div className='Pro-Card-Desc'>
                 <div>
                     <div className='Pro-Card'>
@@ -125,28 +152,42 @@ const ProductCard = ({ title, name, category, id }) => {
                                     <div className='flex' style={{ gap: "3.5%", alignItems: "flex-start", marginTop: "20px", marginBottom: "15px" }}>
                                         <div className='flex setQuantity'>
                                             <span id='Moins'>
-                                                <button onClick={Moins} type='button'>
+                                                <button
+                                                    onClick={Moins}
+                                                    type='button'
+                                                    disabled={!product.availability}
+                                                >
                                                     <FaMinus style={{ fontSize: "10px" }} />
                                                 </button>
                                             </span>
                                             <input
                                                 className="quantity-input"
-                                                type="text"
+                                                type="number"
                                                 value={quantity}
                                                 onChange={(e) => setQuantity(Number(e.target.value))}
-                                                min="1"
+                                                min={product.availability ? 1 : 0}
+                                                disabled={!product.availability}
                                             />
                                             <span id='Ajouter'>
-                                                <button onClick={Ajouter} type='button'>
+                                                <button
+                                                    onClick={Ajouter}
+                                                    type='button'
+                                                    disabled={!product.availability}
+                                                >
                                                     <FaPlus style={{ fontSize: "10px" }} />
                                                 </button>
                                             </span>
                                         </div>
                                         <div className="C-D-button-container">
-                                            <button className="C-D-add-to-cart-btn">
+                                            <button
+                                                className="C-D-add-to-cart-btn"
+                                                onClick={handleAddToCart}
+                                                disabled={!product.availability}
+                                            >
                                                 <FaShoppingCart className="C-D-cart-icon" />
                                                 <span>AJOUTER AU PANIER</span>
                                             </button>
+
                                         </div>
                                     </div>
                                     <div className='C-D-add-popularity'>
@@ -172,7 +213,7 @@ const ProductCard = ({ title, name, category, id }) => {
                             <div className={`Pro-Info-Retour ${!afficheDetails ? "active" : ""}`}>
                                 <strong><u>Expédition:</u></strong> <br />
 
-                                <p style={{ marginTop: "10px"}}>Nous livrons à pratiquement n'importe quelle adresse dans le Maroc.</p>
+                                <p style={{ marginTop: "10px" }}>Nous livrons à pratiquement n'importe quelle adresse dans le Maroc.</p>
 
                                 <p style={{ marginTop: "10px", marginBottom: "10px" }}>Lorsque vous passez une commande, nous estimons les dates d'expédition et de livraison en fonction de la disponibilité des articles et des options d'expédition que vous avez choisies. En fonction du prestataire de services d'expédition que vous avez choisi, les dates d'expédition estimées peuvent apparaître sur la page des devis d'expédition.</p>
 
@@ -184,7 +225,7 @@ const ProductCard = ({ title, name, category, id }) => {
 
                                 <p style={{ marginTop: "10px" }}>Si vous devez retourner un article, il vous suffit de vous connecter à votre compte, d'afficher la commande à l'aide du lien « Commandes complètes » dans le menu « Mon compte » et de cliquer sur le bouton « Retourner l'article ». Nous vous informerons par e-mail de votre remboursement une fois que nous aurons reçu et traité l'article retourné.</p>
 
-                                <div style={{ marginTop: "10px",color:"#5d5d5d" }}>
+                                <div style={{ marginTop: "10px", color: "#5d5d5d" }}>
                                     <p>- Le produit doit être retourné dans son état d'origine, non utilisé, non endommagé, et dans son emballage scellé d'origine.</p>
 
                                     <p style={{ marginTop: "10px" }}>- Tous les accessoires, manuels et garanties inclus avec le produit doivent être retournés.</p>

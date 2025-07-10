@@ -120,5 +120,36 @@ router.get('/:category', async (req, res) => {
   }
 });
 
+router.post('/purchase', async (req, res) => {
+  const { items } = req.body; // items: [{id, quantity}]
+
+  if (!items || !Array.isArray(items)) {
+    return res.status(400).json({ message: 'Invalid purchase data' });
+  }
+
+  try {
+    for (const item of items) {
+      const product = await Product.findById(item.id);
+      if (!product) {
+        return res.status(404).json({ message: `Product not found: ${item.id}` });
+      }
+
+      if (product.quantity < item.quantity) {
+        return res.status(400).json({ message: `Not enough stock for product ${product.title}` });
+      }
+
+      product.quantity -= item.quantity;
+      await product.save();
+
+      
+    }
+
+    return res.status(200).json({ message: 'Purchase successful' });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
 
 module.exports = router;

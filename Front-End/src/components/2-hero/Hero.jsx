@@ -1,6 +1,8 @@
 import './hero.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Panier from './panier/Panier';
+
 
 const Hero = () => {
     const [Categorie, setCategorie] = useState('ALL');
@@ -49,16 +51,7 @@ const Hero = () => {
                     </div>
                 </div>
 
-                <div style={{marginTop:'15px'}} className='flex contenu-shopping-cart'>
-                    <div className='flex'>
-                        <span className='icon-shopping-cart'></span>
-                        <span className='lenght-shopping-cart'>0</span>
-                    </div>
-                    <div className='cart-price'>
-                        <p id='cart'>My Card</p>
-                        <p id='price'>0.00 DHS</p>
-                    </div>
-                </div>
+                 <Panier />
             </div>
 
             {/* Responsive Search Bar */}
